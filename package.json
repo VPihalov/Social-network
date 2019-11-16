@@ -19,11 +19,13 @@
   "homepage": "https://github.com/VPihalov/Social-network#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "chalk-console": "^1.1.0",
     "config": "^3.2.4",
     "express": "^4.17.1",
     "express-validator": "^6.2.0",
     "gravatar": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.3.4",
     "mongoose": "^5.7.11",
     "request": "^2.88.0"
   },
