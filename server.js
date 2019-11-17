@@ -11,6 +11,10 @@ global.chalk = require("chalk-console"); //support for red, gray, blue, cyan, wh
 connectDB();
 /************************************************/
 
+/**************** Init middleware**************/
+app.use(express.json({extended: false})); //for body.req
+/************************************************/
+
 /********************* Routes ******************/
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));
