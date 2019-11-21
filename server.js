@@ -1,10 +1,10 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 6000;
 
 /*********************Global vars *****************/
-global.chalk = require("chalk-console"); //support for red, gray, blue, cyan, white, green, yellow
+global.chalk = require('chalk-console'); //support for red, gray, blue, cyan, white, green, yellow
 /************************************************/
 
 /*********************	DB	 *****************/
