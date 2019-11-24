@@ -7,7 +7,8 @@ const connectDB = async () => {
 	try {
 		await mongoose.connect(db, { 
 			useNewUrlParser: true,
-			useCreateIndex: true
+			useCreateIndex: true,
+			useUnifiedTopology: true
 		})
 			.then(() => {chalk.yellow("MongoDB is connected...")});
 	} catch(err) {
