@@ -42,7 +42,7 @@ router.post('/',
 			location,
 			bio,
 			status,
-			githubsurname,
+			githubusername,
 			skills,
 			youtube,
 			facebook,
@@ -59,7 +59,7 @@ router.post('/',
 		if(location) profileFields.location = location;
 		if(bio) profileFields.bio = bio;
 		if(status) profileFields.status = status;
-		if(githubsurname) profileFields.githubsurname = githubsurname;
+		if(githubusername) profileFields.githubusername = githubusername;
 		if(skills) profileFields.skills = skills.split(',').map(skill => skill.trim());
 
 		//Build social object
@@ -90,6 +90,39 @@ router.post('/',
 			console.log(error);
 			res.status(500).send({msg: "Server error"})
 		}
+});
+
+//@route 	Get api/profile
+//@desc		Get all profile
+//@access 	Public
+router.get("/", async(req, res) => {
+	try {
+		const profiles = await Profile.find().populate('user', ['name', 'avatar']);
+		res.json(profiles)
+	} catch (error) {
+		console.log(error.message);
+		res.status(500).send("Server Error")
+	}
+});
+
+//@route 	Get api/profile/user/:user_id
+//@desc		Get profile by user ID
+//@access 	Public
+router.get("/user/:user_id", async(req, res) => {
+	console.log(`req.params:`, req.params)
+	try {
+		const profile = await Profile.findOne({user: req.params.user_id}).populate('user', ['name', 'avatar']);
+		if(!profile) {
+			return res.status(400).json({msg: "Profile not found"})
+		}
+		res.json(profile)
+	} catch (error) {
+		console.log(error.message);
+		if(error.kind == ObjectId) {
+			return res.status(400).json({msg: "Profile not found"})
+		}
+		res.status(500).send("Server Error")
+	}
 })
 
 module.exports = router
