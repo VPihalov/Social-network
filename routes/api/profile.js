@@ -9,7 +9,6 @@ const { check, validationResult } = require('express-validator');
 //@desc		Get current users profile
 //@access 	Private
 router.get('/me', auth, async (req, res) => {
-	console.log(`req.body: `, req.body)
 	try {
 		const profile = await Profile.findOne({user: req.user.id})
 			.populate('user', ['name', 'avatar']);
@@ -27,9 +26,10 @@ router.get('/me', auth, async (req, res) => {
 //@route 	Post api/profile
 //@desc		create and update users profile
 //@access 	Private
-router.post('/', [auth, [
+router.post('/', 
+[auth, [
 	check('status', 'Status is required').not().isEmpty(),
-	check('skills', 'Status is required').not().isEmpty(),
+	check('skills', 'Status is required').not().isEmpty()
 ]], 
     async (req, res) => {
 		const errors = validationResult(req);
@@ -61,8 +61,35 @@ router.post('/', [auth, [
 		if(status) profileFields.status = status;
 		if(githubsurname) profileFields.githubsurname = githubsurname;
 		if(skills) profileFields.skills = skills.split(',').map(skill => skill.trim());
-		console.log(`profileFields: `, profileFields);
-		res.send("Hello")
+
+		//Build social object
+		profileFields.social = {};
+		if(youtube) profileFields.social.youtube = youtube;
+		if(twitter) profileFields.social.twitter = twitter;
+		if(facebook) profileFields.social.facebook = facebook;
+		if(instagram) profileFields.social.instagram = instagram;
+		if(linkedin) profileFields.social.linkedin = linkedin;
+
+		try {
+			let profile = await Profile.findOne({user: req.user.id});
+			//Update profile
+			if(profile) {
+				profile = await Profile.findOneAndUpdate(
+					{user: req.user.id},
+					{$set: profileFields},
+					{new: true,
+					 useFindAndModify: false}
+				)
+				return res.json(profile)
+			};
+			//Create profile
+			profile = new Profile(profileFields);
+			await profile.save();
+			res.json(profile);
+		} catch (error) {
+			console.log(error);
+			res.status(500).send({msg: "Server error"})
+		}
 })
 
 module.exports = router
