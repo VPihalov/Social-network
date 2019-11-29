@@ -17,7 +17,6 @@ router.post('/', [auth, [
 	}
 	try {
 		const user = await User.findById(req.user.id);
-		chalk.red('user:',  user)
 		const newPost = new Post({
 			text: req.body.text,
 			name: user.name,
@@ -51,7 +50,6 @@ router.get("/", auth, async(req, res) => {
 router.get("/:post_id", auth, async(req, res) => {
 	try {
 		const post = await Post.findById(req.params.post_id);
-		chalk.red(`req.params`, post)
 		if(!post) {
 			return res.status(404).json({msg: "Post not found"})
 		}
@@ -83,18 +81,17 @@ router.delete("/:post_id", auth, async(req, res) => {
 	}
 });
 
-//@route 	PUT api/posts/likes/post_id	
+//@route 	PUT api/posts/like/post_id	
 //@desc		Like post
 //@access 	Private
 router.put("/like/:post_id", auth, async (req, res) => {
 	try {
 		const post = await Post.findById(req.params.post_id);
-		chalk.red(`likes`, post)
 		if(post.likes.filter(like => like.user.toString() === req.user.id).length > 0) {
 			return res.status(400).send({msg: 'Post already liked'})
 		} else {
 			post.likes.unshift({user: req.user.id});
-			res.send(post);
+			res.send(post.likes);
 			await post.save();
 		}
 		
@@ -102,6 +99,55 @@ router.put("/like/:post_id", auth, async (req, res) => {
 		console.log(error);
 		res.status(500).send("Server Error")
 	}
-})
+});
+
+//@route 	PUT api/posts/like/post_id	
+//@desc		Unlike post
+//@access 	Private
+router.put("/unlike/:post_id", auth, async (req, res) => {
+	try {
+		const post = await Post.findById(req.params.post_id);
+		if(post.likes.filter(like => like.user.toString() === req.user.id).length === 0) {
+			return res.status(400).send({msg: 'Post has not been liked'})
+		} else {
+			const removeElement = post.likes.findIndex(item => item.user.toString() === req.user.id);
+			post.likes.splice(removeElement, 1);
+			await post.save();
+			res.send(post.likes);
+		}
+		
+	} catch (error) {
+		console.log(error);
+		res.status(500).send("Server Error")
+	}
+});
+
+//@route 	POST api/posts/comments/:post_id
+//@desc		Comment post route
+//@access 	Private
+router.post('/comments/:post_id', [auth, [
+	check('text', 'Text is required').not().isEmpty(),
+]], async (req, res) => {
+	const errors = validationResult(req);
+	if(!errors.isEmpty()) {	
+		res.status(400).json({errors: errors.array()})
+	}
+	try {
+		const post = await Post.findById(req.params.post_id);
+		const user = await User.findById(req.user.id);
+		const newComment = {
+			text: req.body.text,
+			name: user.name,
+			avatar: user.avatar,
+			user: req.user.id
+		};
+		post.comments.unshift(newComment);
+		await post.save();
+		res.send(post)
+	} catch (error) {
+		console.log(error);
+		res.status(500).send({msg: "Server error"})
+	}
+});
 
 module.exports = router
