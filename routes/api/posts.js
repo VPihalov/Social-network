@@ -32,4 +32,17 @@ router.post('/', [auth, [
 	}
 });
 
+//@route 	Get api/posts
+//@desc		Get all posts
+//@access 	Private
+router.get("/", async(req, res) => {
+	try {
+		const posts = await Post.find().populate('user', ['name', 'avatar']);
+		res.json(posts)
+	} catch (error) {
+		console.log(error.message);
+		res.status(500).send("Server Error")
+	}
+});
+
 module.exports = router
