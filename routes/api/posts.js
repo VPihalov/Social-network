@@ -69,10 +69,8 @@ router.get("/:post_id", auth, async(req, res) => {
 //@desc		Delete post by id
 //@access 	Private
 router.delete("/:post_id", auth, async(req, res) => {
-	chalk.red('post', req)
 	try {
-		chalk.red('------------')
-		const post = await Post.findById(req.params.id);
+		const post = await Post.findById(req.params.post_id);
 		if(post.user.toString() !== req.user.id) {
 			return res.status(401).json({msg: 'User is not authorized'})
 		} else {
