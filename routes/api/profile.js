@@ -111,6 +111,7 @@ router.get("/", async(req, res) => {
 //@desc		Get profile by user ID
 //@access 	Public
 router.get("/user/:user_id", async(req, res) => {
+	console.log(`req.params:`, req.params)
 	try {
 		const profile = await Profile.findOne({user: req.params.user_id}).populate('user', ['name', 'avatar']);
 		if(!profile) {
