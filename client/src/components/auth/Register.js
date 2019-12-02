@@ -1,22 +1,53 @@
 import React, {Fragment, useState} from 'react'
+import { set } from 'mongoose';
 
 const Register = () => {
 	//formData - our state - all widgets on the form
 	//formDate is like state = {formData: {}}
 	//setFormData - function to update state
 	//setFormData - is like this.setState - pass new state
-	const [formData, setFormData] = useState({});
+	const [formData, setFormData] = useState({
+		name: '',
+		email: '',
+		password: '',
+		password2: '',
+	});
+
+	const {name, email, password, password2} = formData;
+	const onChange = e => setFormData({...formData, [e.target.name]: e.target.value});
+	const onSubmit = e => {
+		e.preventDefault();
+		if(password !== password2) {
+			console.log("Passwords do not match")
+		} else {
+			console.log(formData)
+		}
+	}
 	
 	return (
 		<Fragment>
 			<h1 className="large text-primary">Sign Up</h1>
 				<p className="lead"><i className="fas fa-user"></i> Create Your Account</p>
-				<form className="form" action="create-profile.html">
+				<form className="form" onSubmit={e => onSubmit(e)}>
 					<div className="form-group">
-						<input type="text" placeholder="Name" name="name" required />
+						<input 
+							type="text"
+							placeholder="Name"
+							name="name"
+							value={name} 
+							onChange={e => onChange(e)} 
+							required
+						/>
 					</div>
 					<div className="form-group">
-						<input type="email" placeholder="Email Address" name="email" />
+						<input
+							type="email" 
+							placeholder="Email Address" 
+							name="email"
+							value={email} 
+							onChange={e => onChange(e)} 
+							required
+						/>
 						<small className="form-text"
 							>This site uses Gravatar so if you want a profile image, use a
 							Gravatar email</small
@@ -27,6 +58,9 @@ const Register = () => {
 							type="password"
 							placeholder="Password"
 							name="password"
+							value={password} 
+							onChange={e => onChange(e)} 
+							required
 							minLength="6"
 						/>
 					</div>
@@ -35,6 +69,9 @@ const Register = () => {
 							type="password"
 							placeholder="Confirm Password"
 							name="password2"
+							value={password2} 
+							onChange={e => onChange(e)} 
+							required
 							minLength="6"
 						/>
 					</div>
