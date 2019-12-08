@@ -1,9 +1,10 @@
 import React, {Fragment, useState} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {setAlert} from '../../actions/alert'
+import {setAlert} from '../../actions/alert';
+import PropTypes from 'prop-types';
 
-const Register = (props) => {
+const Register = ({setAlert}) => {
 	//formData - our state - all widgets on the form
 	//formDate is like state = {formData: {}}
 	//setFormData - function to update state
@@ -20,7 +21,7 @@ const Register = (props) => {
 	const onSubmit = async e => {
 		e.preventDefault();
 		if(password !== password2) {
-			props.setAlert("Passwords do not match", "danger");
+			setAlert("Passwords do not match", "danger");
 		} else {
 			console.log("User created");
 		}
@@ -82,4 +83,10 @@ const Register = (props) => {
   );
 };
 
+Register.propTypes = {
+	setAlert: PropTypes.func.isRequired,
+}
+
+//null -  Если  слежение за обновлениями состояния не интересно,
+// передайте connect() undefined или null в качестве первого аргумента
 export default connect(null, {setAlert})(Register)
