@@ -1,7 +1,17 @@
 import axios from 'axios';
-import {REGISTER_SUCCESS, REGISTER_FAIL} from './types';
+import {
+	REGISTER_SUCCESS,
+	REGISTER_FAIL,
+	USER_LOADED, 
+	AUTH_ERROR} 
+from './types';
 import {setAlert} from '../actions/alert';
+import { USER_LOADED, AUTH_ERROR } from './types';
 
+//Load user
+const
+
+//Register user
 export const register = ({name, email, password}) => async dispatch => {
    const body = JSON.stringify({name, email, password});
    const config = {
