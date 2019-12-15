@@ -17,10 +17,13 @@ if (localStorage.token) {
 }
 
 const App = () => {
+
 	useEffect(() => {
 		store.dispatch(loadUser())
 	}, [])
-	return (<Provider store={store}>			
+
+	return (
+	<Provider store={store}>			
 		<Router>
 			<Fragment>
 				<Navbar/>
@@ -35,6 +38,7 @@ const App = () => {
 			</Fragment>
 		</Router>
 	</Provider>	
+
 )}
 
 export default App;
