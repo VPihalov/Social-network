@@ -5,12 +5,12 @@ import {
 	USER_LOADED, 
 	AUTH_ERROR,
 	LOGIN_SUCCESS,
-	LOGIN_FAIL
+   LOGIN_FAIL,
+   LOGOUT
 } 
 from './types';
 import {setAlert} from '../actions/alert';
 import setAuthToken from '../utils/setAuthToken';
-
 
 //Register user
 export const register = ({name, email, password}) => async dispatch => {
@@ -57,7 +57,6 @@ export const loadUser = () => async dispatch => {
 
 }
 
-
 //Login user
 export const login = (email, password) => async dispatch => {
 	const body = JSON.stringify({email, password});
@@ -82,4 +81,11 @@ export const login = (email, password) => async dispatch => {
 				type: LOGIN_FAIL
 		 })
 	}
+}
+
+//Logout user
+export const logout = () => dispatch => {
+   dispatch({
+      type: LOGOUT
+   })
 }
