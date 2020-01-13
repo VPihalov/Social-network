@@ -15,10 +15,10 @@ router.get('/me', auth, async (req, res) => {
 		const profile = await Profile.findOne({user: req.user.id})
 			.populate('user', ['name', 'avatar']);
 		if(!profile) {
-			res.status(400).json({msg: "There is no profile  for this user"})
+			res.status(400).json({msg: "There is no profile  for this user"});
+			return
 		}
 		res.json(profile)
-
 	} catch (error) {
 		chalk.error(error)
 		res.status(500).send('Server Error')
