@@ -101,6 +101,4 @@ const mapStateToProps = state => ({
 	isAuthenticated: state.auth.isAuthenticated
 });
 
-//null -  Если  слежение за обновлениями состояния не интересно,
-// передайте connect() undefined или null в качестве первого аргумента
 export default connect(mapStateToProps, {setAlert, register})(Register)
