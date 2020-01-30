@@ -31,7 +31,7 @@ router.get('/me', auth, async (req, res) => {
 router.post('/', 
 [auth, [
 	check('status', 'Status is required').not().isEmpty(),
-	check('skills', 'Status is required').not().isEmpty()
+	check('skills', 'Skills is required').not().isEmpty()
 ]], 
     async (req, res) => {
 		const errors = validationResult(req);
@@ -236,7 +236,6 @@ router.put("/education", [auth, [
 		to,
 		description 
 	}
-	console.log(`school`, school)
 
 	try {
 		const profile = await Profile.findOne({user: req.user.id});
