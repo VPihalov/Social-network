@@ -8,7 +8,7 @@ const AddEducation = ({addEducation, history}) => {
 	const [formData, setFormData] = useState({
 		school: '',
 		degree: '',
-		fieldofstudy: '',
+		fieldOfStudy: '',
 		from: '',
 		to: '',
 		current: false,
@@ -17,7 +17,7 @@ const AddEducation = ({addEducation, history}) => {
 
 	const [toDateDisabled, toggleDisabled] = useState(false);
 
-	const {school, degree, fieldofstudy, from, to, current, description} = formData;
+	const {school, degree, fieldOfStudy, from, to, current, description} = formData;
 	
 	const onChange = e => setFormData({...formData, [e.target.name]: e.target.value})
 
@@ -57,8 +57,8 @@ const AddEducation = ({addEducation, history}) => {
 					<input 
 					type="text" 
 					placeholder="Field of study" 
-					name="fieldofstudy" 
-					value={fieldofstudy} 
+					name="fieldOfStudy" 
+					value={fieldOfStudy} 
 					onChange = {e => onChange(e)}/>
         </div>
 
