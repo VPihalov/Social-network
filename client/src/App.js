@@ -25,6 +25,13 @@ if (localStorage.token) {
 const App = () => {
 
 	useEffect(() => {
+		for (var i = 0; i < 10;  i++) {
+			var a = i;
+			setTimeout(function() {
+				console.log(a)
+			}, 50)
+		}
+		
 		store.dispatch(loadUser())
 	}, [])
 
