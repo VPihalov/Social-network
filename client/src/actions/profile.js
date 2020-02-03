@@ -128,4 +128,56 @@ export const createProfile = (
 				payload: { msg: err.response.statusText, status: err.response.status }
 			});
 		}
+	 };
+
+	 //Delete experience
+	 export const deleteExperience = id => async dispatch => {
+		 try {
+				 const res = await axios.delete(`api/profile/experience/${id}`)
+				 dispatch({
+					 type: UPDATE_PROFILE,
+					 payload: res.data
+				 });
+
+				 dispatch(setAlert('Profile updated', 'success'));
+	 
+				//  history.push('/dashboard');
+		 } catch(err) {
+			const errors = err.response.data.errors;
+	
+			if (errors) {
+				errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+			}
+		
+			dispatch({
+				type: PROFILE_ERROR,
+				payload: { msg: err.response.statusText, status: err.response.status }
+			});
+		 }
 	 }
+
+		//Delete education
+		export const deleteEducation = id => async dispatch => {
+			try {
+					const res = await axios.delete(`api/profile/education/${id}`)
+					dispatch({
+						type: UPDATE_PROFILE,
+						payload: res.data
+					});
+	
+					dispatch(setAlert('Profile updated', 'success'));
+		
+					//  history.push('/dashboard');
+			} catch(err) {
+				const errors = err.response.data.errors;
+		
+				if (errors) {
+					errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+				}
+			
+				dispatch({
+					type: PROFILE_ERROR,
+					payload: { msg: err.response.statusText, status: err.response.status }
+				});
+			}
+		}

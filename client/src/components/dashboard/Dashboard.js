@@ -28,6 +28,9 @@ const Dashboard = ({
 		<DashboardActions/>
 		<Experience experience={profile.experience}/>	
 		<Education education={profile.education}/>	
+		<button className="btn btn-danger">
+			<i className='fas fa-user-minus' />Delete my account
+		</button>
 	</Fragment>
 		) : (<Fragment>
 		<p>You have not yet setup a profile, please add some info</p>
