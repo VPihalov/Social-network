@@ -1,20 +1,38 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, Fragment} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {getProfiles} from '../../actions/profile'
+import Spinner from '../layout/Spinner'
+import ProfileItem from './ProfileItem'
 
-const Profiles = ({getProfiles, profile}) => {
-
-	const profiles = useEffect(() => {
+const Profiles = ({getProfiles, profile: {loading, profiles}}) => {
+	console.log(`profiles`, profiles)
+	console.log(`loading`, loading)
+	useEffect(() => {
 		getProfiles()
 	}, []);
 
-	console.log('profiles', profiles)
 
 	return (
-		<div>
-			Profiles
-		</div>
+		<Fragment>
+			{loading ? <Spinner/> : (
+				<Fragment>
+					<h1 className="large text-primary">Developers profiles</h1>
+					<p className="lead">
+						<i className="fab fa-connectdevelop">
+							Browse and connect with developers
+						</i>
+					</p>
+					<div className="profiles">
+						{profiles.length > 0 ? (
+							profiles.map(profile => {
+								return <ProfileItem key={profile._id} profile={profile}></ProfileItem>							
+							})
+						) : (<h4> No profiles found </h4>)}
+					</div>
+				</Fragment>
+			)}
+		</Fragment>
 	)
 }
 
