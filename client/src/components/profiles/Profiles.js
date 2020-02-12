@@ -6,11 +6,10 @@ import Spinner from '../layout/Spinner'
 import ProfileItem from './ProfileItem'
 
 const Profiles = ({getProfiles, profile: {loading, profiles}}) => {
-	console.log(`profiles`, profiles)
-	console.log(`loading`, loading)
+
 	useEffect(() => {
 		getProfiles()
-	}, []);
+	}, [getProfiles]);
 
 
 	return (
