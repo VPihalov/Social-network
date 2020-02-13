@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom'
 import {getProfileById} from '../../actions/profile'
 import Spinner from '../../components/layout/Spinner'
 import ProfileTop from './ProfileTop'
+import ProfileAbout from './ProfileAbout'
 
 const Profile = ({
 	getProfileById,
@@ -32,6 +33,7 @@ const Profile = ({
 					 Edit Profile
 					</Link>)}
 				<ProfileTop profile={profile}></ProfileTop>	
+				<ProfileAbout profile={profile}></ProfileAbout>	
 			</Fragment>)}
 		</Fragment>
 	)
