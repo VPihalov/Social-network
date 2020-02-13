@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {getProfileById} from '../../actions/profile'
 import Spinner from '../../components/layout/Spinner'
+import ProfileTop from './ProfileTop'
 
 const Profile = ({
 	getProfileById,
@@ -30,6 +31,7 @@ const Profile = ({
 				 (<Link to="/edit-profile" className="btn btn-dark">
 					 Edit Profile
 					</Link>)}
+				<ProfileTop profile={profile}></ProfileTop>	
 			</Fragment>)}
 		</Fragment>
 	)
