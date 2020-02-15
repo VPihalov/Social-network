@@ -6,6 +6,7 @@ import {getProfileById} from '../../actions/profile'
 import Spinner from '../../components/layout/Spinner'
 import ProfileTop from './ProfileTop'
 import ProfileAbout from './ProfileAbout'
+import ProfileExperience from './ProfileExperience'
 
 const Profile = ({
 	getProfileById,
@@ -16,7 +17,7 @@ const Profile = ({
 
 	const gottenProfile = useEffect(() => {
 		getProfileById(match.params.id)
-	}, [getProfileById]);
+	}, [getProfileById, match.params.id]);
 
 	console.log('gottenProfile', gottenProfile)
 
@@ -33,7 +34,15 @@ const Profile = ({
 					 Edit Profile
 					</Link>)}
 				<ProfileTop profile={profile}></ProfileTop>	
-				<ProfileAbout profile={profile}></ProfileAbout>	
+				<ProfileAbout profile={profile}></ProfileAbout>
+				<div className='profile-exp bg-white p-2'>
+					<h2 className='text-primary'>Experience</h2>
+					{profile.experience.length > 0 ? (
+						profile.experience.map(exp => {
+							return <ProfileExperience key={exp._id} experience={exp}/>
+						})
+					) : (<h4>No experience credentials</h4>)}
+				</div>	
 			</Fragment>)}
 		</Fragment>
 	)
