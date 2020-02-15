@@ -7,6 +7,7 @@ import Spinner from '../../components/layout/Spinner'
 import ProfileTop from './ProfileTop'
 import ProfileAbout from './ProfileAbout'
 import ProfileExperience from './ProfileExperience'
+import ProfileEducation from './ProfileEducation'
 
 const Profile = ({
 	getProfileById,
@@ -33,17 +34,27 @@ const Profile = ({
 				 (<Link to="/edit-profile" className="btn btn-dark">
 					 Edit Profile
 					</Link>)}
-				<ProfileTop profile={profile}></ProfileTop>	
-				<ProfileAbout profile={profile}></ProfileAbout>
-				<div className='profile-exp bg-white p-2'>
-					<h2 className='text-primary'>Experience</h2>
-					{profile.experience.length > 0 ? (
-						profile.experience.map(exp => {
-							return <ProfileExperience key={exp._id} experience={exp}/>
-						})
-					) : (<h4>No experience credentials</h4>)}
-				</div>	
-			</Fragment>)}
+				<div className="profile-grid my-1">
+					<ProfileTop profile={profile}></ProfileTop>	
+					<ProfileAbout profile={profile}></ProfileAbout>
+					<div className='profile-exp bg-white p-2'>
+						<h2 className='text-primary'>Experience</h2>
+						{profile.experience.length > 0 ? (
+							profile.experience.map(exp => {
+								return <ProfileExperience key={exp._id} experience={exp}/>
+							})
+						) : (<h4>No experience credentials</h4>)}
+					</div>	
+					<div className='profile-edu bg-white p-2'>
+						<h2 className='text-primary'>Education</h2>
+						{profile.education.length > 0 ? (
+							profile.education.map(edu => {
+								return <ProfileEducation key={edu._id} education={edu}/>
+							})
+						) : (<h4>No education credentials</h4>)}
+					</div>	
+				</div>
+							</Fragment>)}
 		</Fragment>
 	)
 }
