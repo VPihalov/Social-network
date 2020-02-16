@@ -56,7 +56,7 @@ const Profile = ({
 					</div>	
 					{profile.githubusername && <ProfileGithubRepos userName={profile.githubusername}/>}
 				</div>
-							</Fragment>)}
+			</Fragment>)}
 		</Fragment>
 	)
 }
