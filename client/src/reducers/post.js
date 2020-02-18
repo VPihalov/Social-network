@@ -23,9 +23,10 @@ export default function(state = initialState, action) {
 				loading: false
 			}
 			case UPDATE_LIKES:
+				console.log(`state`, state.posts.data)
 				return {
 					...state,
-					posts: state.posts.map(post =>
+					posts: state.posts.data.map(post =>
 						post._id === payload.id ? { ...post, likes: payload.likes } : post
 					),
 					loading: false
