@@ -4,7 +4,6 @@ import PostItem from './PostItem'
 import PropTypes from 'prop-types'
 import {getPosts} from '../../actions/post'
 import {connect} from 'react-redux'
-import { loadUser } from '../../actions/auth'
 
 const Posts = ({
 	getPosts,
@@ -22,7 +21,7 @@ const Posts = ({
 		</p>
 		{/*Post form*/}
 		<div className='posts'>
-        {posts.data.map(post => (
+        {posts.map(post => (
           <PostItem key={post._id} post={post} />
         ))}
      </div>
