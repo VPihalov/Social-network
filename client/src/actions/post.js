@@ -4,7 +4,8 @@ import {
 	POST_ERROR, 
 	UPDATE_LIKES,
 	DELETE_POST,
-	SET_ALERT
+	SET_ALERT,
+	CREATE_POST
 } from './types'
 import {setAlert} from './alert'
 
@@ -75,6 +76,34 @@ export const deletePost = id => async dispatch => {
 
 	} catch(err) {
 			console.log(err)
+	}
+};
+
+// Create post
+export const createPost = text => async dispatch => {
+	const config = {
+		headers: {
+			"Content-Type": "application/json"
+		}
+	};
+	
+	try {
+		const res = await axios.post('/api/posts', text, config);
+
+		dispatch({
+			type: CREATE_POST,
+			payload: {
+				post: res.data
+			}
+		})
+
+		dispatch(setAlert("Post created successfully", "success"))
+
+	} catch (err) {
+		dispatch({
+			type: POST_ERROR,
+			payload: { msg: err.response.statusText, status: err.response.status }
+		})
 	}
 }
 

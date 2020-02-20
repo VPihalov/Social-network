@@ -17,6 +17,7 @@ router.post('/', [auth, [
 	}
 	try {
 		const user = await User.findById(req.user.id);
+		console.log(`request`, req.body)
 		const newPost = new Post({
 			text: req.body.text,
 			name: user.name,
