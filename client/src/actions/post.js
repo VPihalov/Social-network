@@ -9,7 +9,7 @@ import {
 } from './types'
 import {setAlert} from './alert'
 
-//get posts
+//Get posts
 export const getPosts = () => async dispatch => {
 	try {
 		const res = await axios.get('/api/posts');
@@ -89,6 +89,7 @@ export const createPost = text => async dispatch => {
 	
 	try {
 		const res = await axios.post('/api/posts', text, config);
+		console.log(`res.data`, res.data)
 
 		dispatch({
 			type: CREATE_POST,

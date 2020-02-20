@@ -46,8 +46,8 @@ export default function(state = initialState, action) {
 		case CREATE_POST:
 			return {
 				...state,
-				loading: false,
-				posts: [...state.posts, payload]
+				posts: [payload, ...state.posts],
+				loading: false
 			}
 		default: 
 			return state
