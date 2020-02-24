@@ -9,7 +9,6 @@ import CommentForm from './CommentForm'
 
 const Post = ({
 	getPost,
-	id,
 	match,
 	post: {
 		loading, post
@@ -18,13 +17,13 @@ const Post = ({
 
 	useEffect(() => {
 		getPost(match.params.id)
-	}, [getPost]) 	
+	}, [getPost, match]) 	
 
 	return loading || post === null ? (<Spinner/>) : (
 			<Fragment>
 				<Link to='/posts' className='btn'>Back to posts</Link>
 				<PostItem post={post} showAction={false}/>
-				<CommentForm/>
+				<CommentForm postId={match.params.id}/>
 			</Fragment>
 		)
 	

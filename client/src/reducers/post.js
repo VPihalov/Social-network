@@ -5,8 +5,11 @@ import {
 	UPDATE_LIKES,
 	DELETE_POST,
 	CREATE_POST,
-	GET_PROFILE
-} from '../actions/types'
+	GET_PROFILE,
+	CREATE_COMMENT,
+	DELETE_COMMENT
+} 
+from '../actions/types'
 
 const initialState = {
 	posts: [],
@@ -56,6 +59,14 @@ export default function(state = initialState, action) {
 				...state,
 				posts: [payload, ...state.posts],
 				loading: false
+			}
+		case CREATE_COMMENT:
+			return {
+				...state,
+				loading: false,
+				post: {
+					...state.post, comments: [payload, ...state.posts.comments]
+				}
 			}
 		default: 
 			return state

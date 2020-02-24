@@ -1,12 +1,19 @@
 import React, {useState, Fragment} from 'react'
+import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {createComment} from '../../actions/post'
 
 const CommentForm = ({
-
+	createComment,
+	postId
 }) => {
 
 	const [comment, setComment] = useState('');
-	const onSubmit = e => {}
+	const onSubmit = e => {
+		e.preventDefault();
+		createComment(postId, {text: comment});
+		setComment('')
+	}
 
 	return <Fragment>
 		  <div className="bg-primary p" >
@@ -31,6 +38,10 @@ const CommentForm = ({
          />
       </form>
 	</Fragment>
-}
+};
 
-export default connect() (CommentForm)
+CommentForm.protoTypes = {
+	createComment: PropTypes.func.isRequired
+};
+
+export default connect(null, {createComment}) (CommentForm)

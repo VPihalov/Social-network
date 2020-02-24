@@ -130,7 +130,7 @@ export const deletePost = id => async dispatch => {
 };
 
 // Create comment
-export const createComment = postId => async dispatch => {
+export const createComment = (postId, comment) => async dispatch => {
 	const config = {
 		headers: {
 			"Content-Type": "application/json"
@@ -143,11 +143,11 @@ export const createComment = postId => async dispatch => {
 		dispatch({
 			type: CREATE_COMMENT,
 			payload: {
-				post: postId
+				post: res.data
 			}
 		})
 
-		dispatch(setAlert("Post created successfully", "success"))
+		dispatch(setAlert("Comment created successfully", "success"))
 
 	} catch (err) {
 		dispatch({
