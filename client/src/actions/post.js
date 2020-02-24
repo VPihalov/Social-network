@@ -6,8 +6,11 @@ import {
 	UPDATE_LIKES,
 	DELETE_POST,
 	SET_ALERT,
-	CREATE_POST
-} from './types'
+	CREATE_POST,
+	CREATE_COMMENT,
+	DELETE_COMMENT
+} 
+from './types'
 import {setAlert} from './alert'
 
 //Get posts
@@ -80,23 +83,6 @@ export const removeLike = id => async dispatch => {
   }
 };
 
-// Delete post
-export const deletePost = id => async dispatch => {
-	try {
-
-		await axios.delete(`/api/posts/${id}`);
-		dispatch({
-			type: DELETE_POST,
-			payload: {id}
-		})
-
-		dispatch(setAlert("Post deleted successfully", "success"))
-
-	} catch(err) {
-			console.log(err)
-	}
-};
-
 // Create post
 export const createPost = text => async dispatch => {
 	const config = {
@@ -125,4 +111,51 @@ export const createPost = text => async dispatch => {
 		})
 	}
 }
+
+// Delete post
+export const deletePost = id => async dispatch => {
+	try {
+
+		await axios.delete(`/api/posts/${id}`);
+		dispatch({
+			type: DELETE_POST,
+			payload: {id}
+		})
+
+		dispatch(setAlert("Post deleted successfully", "success"))
+
+	} catch(err) {
+			console.log(err)
+	}
+};
+
+// Create comment
+export const createComment = postId => async dispatch => {
+	const config = {
+		headers: {
+			"Content-Type": "application/json"
+		}
+	};
+	
+	try {
+		const res = await axios.post(`/api/posts/comments/${postId}`, comment, config);
+
+		dispatch({
+			type: CREATE_COMMENT,
+			payload: {
+				post: postId
+			}
+		})
+
+		dispatch(setAlert("Post created successfully", "success"))
+
+	} catch (err) {
+		dispatch({
+			type: POST_ERROR,
+			payload: { msg: err.response.statusText, status: err.response.status }
+		})
+	}
+}
+
+
 
