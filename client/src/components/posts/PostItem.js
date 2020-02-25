@@ -62,7 +62,6 @@ const PostItem = ({
 								<span className='comment-count'>{comments.length}</span>
 							)}
 						</Link> 
-						{console.log(`user._id`, user)}
 						{!auth.loading && user === auth.user._id && (
 							<button
 								type="button"

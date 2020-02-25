@@ -8,10 +8,10 @@ const CommentForm = ({
 	postId
 }) => {
 
-	const [comment, setComment] = useState('');
+	const [text, setComment] = useState('');
 	const onSubmit = e => {
 		e.preventDefault();
-		createComment(postId, {text: comment});
+		createComment(postId, {text});
 		setComment('')
 	}
 
@@ -25,7 +25,7 @@ const CommentForm = ({
             cols="30"
             rows="5"
             placeholder="Print your comment..."
-            value={comment}
+            value={text}
             required
             onChange = {e => {
 							setComment(e.target.value);

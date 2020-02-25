@@ -142,9 +142,7 @@ export const createComment = (postId, comment) => async dispatch => {
 
 		dispatch({
 			type: CREATE_COMMENT,
-			payload: {
-				post: res.data
-			}
+			payload: res.data
 		})
 
 		dispatch(setAlert("Comment created successfully", "success"))

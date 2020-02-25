@@ -61,12 +61,11 @@ export default function(state = initialState, action) {
 				posts: [payload, ...state.posts]
 			}
 		case CREATE_COMMENT:
+			console.log(`payload`, payload)
 			return {
 				...state,
 				loading: false,
-				post: {
-					...state.post, comments: [payload, ...state.post.comments]
-				}
+				post: payload  
 			}
 		case DELETE_COMMENT:
 			return {

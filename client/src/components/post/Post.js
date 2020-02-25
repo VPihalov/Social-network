@@ -26,13 +26,13 @@ const Post = ({
 				<PostItem post={post} showAction={false}/>
 				<CommentForm postId={match.params.id}/>
 				<div className='comments'>
-					{/* {post.comments.map(comment => {
-						<CommentItem comment={comment.text}/>
-					})} */}
+					{console.log(`comments`, post)}
+					{post.comments.map((comment, index) => 
+						<CommentItem comment={comment} key={index}/>
+					)}
 				</div>
 			</Fragment>
 		)
-	
 }
 
 Post.propTypes = {

@@ -1,35 +1,40 @@
 import React from 'react'
+import Moment from 'react-moment'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
+import {deleteComment} from '../../actions/post'
 
 const CommentItem = ({
-   comment
+   comment: {
+		 text, name, avatar, user, date
+	 }
 }) => {
 
-   return  <div class="post bg-white p-1 my-1">
+   return  <div className="post bg-white p-1 my-1">
    <div>
-     <a href="profile.html">
+     <Link to={`/profile/${user}`}>
        <img
-         class="round-img"
-         src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+         className="round-img"
+         src={avatar}
          alt=""
        />
-       <h4>John Doe</h4>
-     </a>
+       <h4>{name}</h4>
+     </Link>
    </div>
    <div>
-     <p class="my-1">
-         {comment}
+     <p className="my-1">
+         {text}
      </p>
-      <p class="post-date">
-         Posted on 04/16/2019
+      <p className="post-date">
+        Posted <Moment format='YYYY/MM/DD'>{date}</Moment>
      </p>
    </div>
  </div>
 };
 
 CommentItem.propTypes = {
-   
+   comment: PropTypes.object.isRequired
 };
 
-export default connect(null, null) (CommentItem)
+export default connect(null, {deleteComment}) (CommentItem)
