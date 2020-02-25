@@ -57,8 +57,8 @@ export default function(state = initialState, action) {
 		case CREATE_POST:
 			return {
 				...state,
-				posts: [payload, ...state.posts],
-				loading: false
+				loading: false,
+				posts: [payload, ...state.posts]
 			}
 		case CREATE_COMMENT:
 			return {
