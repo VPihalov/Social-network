@@ -61,7 +61,6 @@ export default function(state = initialState, action) {
 				posts: [payload, ...state.posts]
 			}
 		case CREATE_COMMENT:
-			console.log(`payload`, payload)
 			return {
 				...state,
 				loading: false,
