@@ -158,5 +158,19 @@ export const createComment = (postId, comment) => async dispatch => {
 	}
 }
 
+// Delete comment
+export const deleteComment = (postId, commentId) => async dispatch => {
+	try {
 
+		await axios.delete(`/api/posts/${postId}/${commentId}`);
+		dispatch({
+			type: DELETE_COMMENT,
+			payload: commentId
+		})
 
+		dispatch(setAlert("Comment deleted successfully", "success"))
+
+	} catch(err) {
+			console.log(err)
+	}
+};

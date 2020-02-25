@@ -6,6 +6,7 @@ import {getPost} from '../../actions/post'
 import Spinner from '../layout/Spinner'
 import PostItem from '../posts/PostItem'
 import CommentForm from './CommentForm'
+import CommentItem from './CommentItem'
 
 const Post = ({
 	getPost,
@@ -24,6 +25,11 @@ const Post = ({
 				<Link to='/posts' className='btn'>Back to posts</Link>
 				<PostItem post={post} showAction={false}/>
 				<CommentForm postId={match.params.id}/>
+				<div className='comments'>
+					{/* {post.comments.map(comment => {
+						<CommentItem comment={comment.text}/>
+					})} */}
+				</div>
 			</Fragment>
 		)
 	

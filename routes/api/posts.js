@@ -172,9 +172,8 @@ router.post('/comments/:post_id', [auth, [
 router.delete('/comments/:post_id/:comment_id', auth, async(req, res) => {
 	try {
 		const post = await Post.findById(req.params.post_id);
-		console.log(`post`, post)
 		const comment = post.comments.find(item => item.id === req.params.comment_id);
-		console.log(`comment`, comment)
+		
 		if(!comment) {
 			return res.status(404).send({msg: "Comment does not exist"})
 		}
@@ -182,10 +181,10 @@ router.delete('/comments/:post_id/:comment_id', auth, async(req, res) => {
 			return res.status(401).send({msg: "This comment does not belong to the current user"})
 		}
 		const removeIndex = post.comments.findIndex(item => item.id === req.params.comment_id);
-		console.log(`removeIndex`, removeIndex);
 		post.comments.splice(removeIndex, 1);
 		await post.save();
 		res.send(post.comments)
+		
 	} catch (error) {
 		console.log(error);
 		res.status(500).send({msg: "Server error"})
