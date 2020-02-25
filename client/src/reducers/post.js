@@ -1,10 +1,15 @@
 import {
 	GET_POSTS, 
+	GET_POST, 
 	POST_ERROR, 
 	UPDATE_LIKES,
 	DELETE_POST,
-	CREATE_POST
-} from '../actions/types'
+	CREATE_POST,
+	GET_PROFILE,
+	CREATE_COMMENT,
+	DELETE_COMMENT
+} 
+from '../actions/types'
 
 const initialState = {
 	posts: [],
@@ -21,6 +26,12 @@ export default function(state = initialState, action) {
 			return {
 				...state,
 				posts: payload,
+				loading: false
+			}
+		case GET_POST:
+			return {
+				...state,
+				post: payload,
 				loading: false
 			}
 		case POST_ERROR:
@@ -48,6 +59,14 @@ export default function(state = initialState, action) {
 				...state,
 				posts: [payload, ...state.posts],
 				loading: false
+			}
+		case CREATE_COMMENT:
+			return {
+				...state,
+				loading: false,
+				post: {
+					...state.post, comments: [payload, ...state.posts.comments]
+				}
 			}
 		default: 
 			return state
