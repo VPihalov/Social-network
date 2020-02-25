@@ -21,9 +21,10 @@ const Posts = ({
 			<i className="fas fas-user"></i> Welcome to the community
 		</p>
 		<PostForm/>
+		{console.log(`posts`, posts)}
 		<div className='posts'>
-        {posts.map(post => (
-          <PostItem key={post._id} post={post} />
+        {posts.map((post, index) => (
+          <PostItem key={index} post={post} />
         ))}
      </div>
 	</Fragment>)
