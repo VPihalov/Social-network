@@ -65,7 +65,7 @@ export default function(state = initialState, action) {
 				...state,
 				loading: false,
 				post: {
-					...state.post, comments: [payload, ...state.posts.comments]
+					...state.post, comments: [payload, ...state.post.comments]
 				}
 			}
 		default: 

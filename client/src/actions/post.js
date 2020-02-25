@@ -150,6 +150,7 @@ export const createComment = (postId, comment) => async dispatch => {
 		dispatch(setAlert("Comment created successfully", "success"))
 
 	} catch (err) {
+		console.log(`err`, err)
 		dispatch({
 			type: POST_ERROR,
 			payload: { msg: err.response.statusText, status: err.response.status }
