@@ -21,22 +21,21 @@ const Posts = ({
 			<i className="fas fas-user"></i> Welcome to the community
 		</p>
 		<PostForm/>
-		{console.log(`posts`, posts)}
 		<div className='posts'>
         {posts.map((post, index) => (
           <PostItem key={index} post={post} />
         ))}
      </div>
 	</Fragment>)
-}
+};
 
 Posts.propTypes = {
 	getPosts: PropTypes.func.isRequired,
 	post: PropTypes.object.isRequired,
-}
+};
 
 const mapStateToProps = state => ({
 	post: state.post
-})
+});
 
 export default connect(mapStateToProps, {getPosts}) (Posts)

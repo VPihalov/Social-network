@@ -48,6 +48,7 @@ const PostItem = ({
 							onClick={() => addLike(_id)}
 							className="btn btn-light">
 							<i className="fas fa-thumbs-up"></i>
+							{console.log(`likes`, likes)}
 							<span>{likes.length > 0 && (<span className="comment-count">{likes.length}</span>)}</span>
 						</button>
 						<button 

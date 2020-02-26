@@ -17,7 +17,6 @@ router.post('/', [auth, [
 	}
 	try {
 		const user = await User.findById(req.user.id);
-		console.log(`request`, req.body)
 		const newPost = new Post({
 			text: req.body.text,
 			name: user.name,
@@ -97,10 +96,9 @@ router.put('/like/:id', auth, async (req, res) => {
     }
 
     post.likes.unshift({ user: req.user.id });
-
-    await post.save();
-
-    res.json(post.likes);
+	 await post.save();
+	 res.json(post.likes);
+	 
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
@@ -184,7 +182,7 @@ router.delete('/comments/:post_id/:comment_id', auth, async(req, res) => {
 		post.comments.splice(removeIndex, 1);
 		await post.save();
 		res.send(post.comments)
-		
+
 	} catch (error) {
 		console.log(error);
 		res.status(500).send({msg: "Server error"})

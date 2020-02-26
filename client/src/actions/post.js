@@ -97,9 +97,7 @@ export const createPost = text => async dispatch => {
 
 		dispatch({
 			type: CREATE_POST,
-			payload: {
-				post: res.data
-			}
+			payload: res.data
 		})
 
 		dispatch(setAlert("Post created successfully", "success"))
