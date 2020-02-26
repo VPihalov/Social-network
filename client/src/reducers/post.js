@@ -55,8 +55,6 @@ export default function(state = initialState, action) {
 				posts: state.posts.filter(post => post._id !== payload.id)
 			};
 		case CREATE_POST:
-			console.log(`payload`, payload)
-			console.log(`state.posts`, state.posts)
 			return {
 				...state,
 				loading: false,

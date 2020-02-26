@@ -93,7 +93,6 @@ export const createPost = text => async dispatch => {
 	
 	try {
 		const res = await axios.post('/api/posts', text, config);
-		console.log(`res.data`, res.data)
 
 		dispatch({
 			type: CREATE_POST,
