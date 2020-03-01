@@ -1,6 +1,7 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const path = require('path');
+global.chalk = require('chalk');
 
 const app = express();
 
