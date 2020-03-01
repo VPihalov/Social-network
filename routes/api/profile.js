@@ -21,7 +21,7 @@ router.get('/me', auth, async (req, res) => {
 		}
 		res.json(profile)
 	} catch (error) {
-		chalk.error(error)
+		console.log(error)
 		res.status(500).send('Server Error')
 	}
 });

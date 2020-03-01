@@ -58,7 +58,7 @@ router.post(
       user.password = await bcrypt.hash(password, salt);
 
 	  await user.save()
-		  .then(() => {chalk.red("User is saved")});
+		  .then(() => {console.log("User is saved")});
 		  
 	  const payload = {
 		  user: {
