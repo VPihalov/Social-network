@@ -4,12 +4,11 @@
   "description": "social network",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "server": "nodemon server"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/VPihalov/Social-network.git"
+    "start": "node server",
+    "server": "nodemon server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "Valeriy Pigalyov",
   "license": "ISC",
@@ -27,10 +26,12 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.3.4",
     "mongoose": "^5.7.11",
+    "react-moment": "^0.9.7",
     "request": "^2.88.0"
   },
   "devDependencies": {
     "concurrently": "^5.0.0",
-    "nodemon": "^1.19.4"
+    "nodemon": "^1.19.4",
+    "remote-redux-devtools": "^0.5.16"
   }
 }
