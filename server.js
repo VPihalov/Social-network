@@ -13,7 +13,7 @@ app.use(express.json({ extended: false }));
 // Define Routes
 app.use('/api/users', require('./routes/api/v1.0/users'));
 app.use('/api/auth', require('./routes/api/v1.0/auth'));
-app.use('/api/profile', require('./routes/api/v1.0/profile'));
+app.use('/api/profiles', require('./routes/api/v1.0/profiles'));
 app.use('/api/posts', require('./routes/api/v1.0/posts'));
 
 // Serve static assets in production

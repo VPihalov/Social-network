@@ -22,7 +22,7 @@ router.get('/me', auth, async (req, res) => {
 		res.json(profile)
 	} catch (error) {
 		console.log(error)
-		res.status(500).send('Server Error')
+		res.status(404).send('Resourse not found')
 	}
 });
 
@@ -91,12 +91,12 @@ router.post('/',
 			res.json(profile);
 		} catch (error) {
 			console.log(error);
-			res.status(500).send({msg: "Server error"})
+			res.status(404).send('Resourse not found')
 		}
 });
 
-//@route 	GET api/profile
-//@desc		Get all profile
+//@route 	GET api/profiles
+//@desc		Get all profiles
 //@access 	Public
 router.get("/", async(req, res) => {
 	try {
@@ -104,7 +104,7 @@ router.get("/", async(req, res) => {
 		res.json(profiles)
 	} catch (error) {
 		console.log(error.message);
-		res.status(500).send("Server Error")
+		res.status(404).send('Resourse not found')
 	}
 });
 
@@ -124,7 +124,7 @@ router.get("/user/:user_id", async(req, res) => {
 		if(error.kind == ObjectId) {
 			return res.status(400).json({msg: "Profile not found"})
 		}
-		res.status(500).send("Server Error")
+		res.status(404).send('Resourse not found')
 	}
 });
 
@@ -142,7 +142,7 @@ router.delete("/", auth, async(req, res) => {
 		res.json({msg: "User deleted"})
 	} catch (error) {
 		console.log(error.message);
-		res.status(500).send("Server Error")
+		res.status(404).send('Resourse not found')
 	}
 });
 
@@ -186,7 +186,7 @@ router.put("/experience", [auth, [
 		res.json(profile)
 	} catch (error) {
 		console.log(error);
-		res.status(500).send("Server Error")
+		res.status(404).send('Resourse not found')
 	}
 });
 
@@ -204,7 +204,7 @@ router.delete('/experience/:exp_id', auth, async(req, res) => {
 		res.json(profile);
 	} catch (error) {
 		console.error(error.message);
-		res.status(500).send("Server Error")
+		res.status(404).send('Resourse not found')
 	}
 });
 
