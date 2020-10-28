@@ -6,7 +6,22 @@ import PropTypes from 'prop-types';
 const Landing = ({isAuthenticated}) => {
   if(isAuthenticated) {
     return <Redirect to='/dashboard'/>
-  }
+	}
+
+	let fibNums = [0, 1];
+	function getFibNums(n) {
+		if (n > 2) {
+			let nextNumber = fibNums[fibNums.length - 2] + fibNums[fibNums.length - 1];
+			fibNums.push(nextNumber);
+			getFibNums(n -1)
+
+		} else {
+			return fibNums
+		}
+		return fibNums
+	}
+
+	console.log(getFibNums(10 ))
 
 	return (
     <section className="landing">
